@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Header from './component/header/Header'
+import { ThemeProvider } from '@mui/material/styles';
+import Home from './component/home/Home';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { Switch } from 'react-router-dom'
+import Cart from './component/cart/Cart';
+import { TemplateProvider } from './template/TemplateProvider.js';
+import ContextProvider from './context/ContextProvider';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      
+        <TemplateProvider>
+        <ContextProvider>
+        <BrowserRouter>
+            <Header/>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/cart' component={Cart} />
+           </Switch>
+           </BrowserRouter>
+        </ContextProvider>
+       
+        </TemplateProvider>
+      
+     
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
